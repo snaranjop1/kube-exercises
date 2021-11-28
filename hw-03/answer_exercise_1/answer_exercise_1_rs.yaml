@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-server
+  template:
+    metadata:
+      labels:
+        app: nginx-server
+      name: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.19.4
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "20m"
+            requests:
+              memory: "128Mi"
+              cpu: "20m"
+          ports:
+            - containerPort: 80

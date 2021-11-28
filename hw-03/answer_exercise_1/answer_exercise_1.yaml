@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+spec:
+  tls:
+    - hosts:
+        - sergionaranjo.student.lasalle.com
+      secretName: secret-ingress-tls
+  rules:
+    - host: sergionaranjo.student.lasalle.com
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: svc-nginx
+                port:
+                  number: 8080
